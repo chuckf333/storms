@@ -1,0 +1,23 @@
+---
+author: Charles Franklin
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library("tidyverse")
+library("ggplot2")
+data("storms")
+?storms
+```
+What can be used to predict wind speed?
+
+```{r}
+ggplot(storms, aes(x=ts_diameter, y=wind)) + geom_point()
+
+qplot(ts_diameter, wind, data = storms, xlab = "Diameter of tropical storm area (34 knots or above)", ylab = "Max sustained wind speed (in knots)") + stat_smooth(method = "lm")
+
+category_model <- lm(data = storms, formula = wind~ts_diameter)
+
+summary(category_model)
+```
